@@ -6,10 +6,18 @@
 
 void code(int* array, int n, int numb)
 {
-	for (int i = 0; i < n; i++)
+	int start = 0, end = n - 1, mid = 0;
+	for (mid = (start + end)/2; start <= end; mid = (start + end)/2)
 	{
-		if (array[i] == numb);
+		if (array[mid] == numb)
+		{
+			printf("%d at position %d\n", array[mid], mid);
+			return;
+		}
+		if (array[mid] > numb) end = mid - 1;
+		else start = mid + 1;
 	}
+	printf("%d is not in array", numb);
 }
 
 int main(int argc, char** argv)
@@ -37,7 +45,7 @@ int main(int argc, char** argv)
 		srand(i);
 		for (int i = 0; i < n; i++)
 		{
-			array[i] = rand() % n;
+			array[i] = i;
 		}
 		code(array, n, 42);
 		n += 100;
