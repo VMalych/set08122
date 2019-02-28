@@ -17,7 +17,7 @@ void code(int* array, int n, int numb)
 		if (array[mid] > numb) end = mid - 1;
 		else start = mid + 1;
 	}
-	printf("%d is not in array", numb);
+	printf("%d is not in array\n", numb);
 }
 
 int main(int argc, char** argv)
@@ -43,9 +43,9 @@ int main(int argc, char** argv)
 		printf("%d\n", (int)t);
 		
 		srand(i);
-		for (int i = 0; i < n; i++)
+		for (int idx = 0; idx < n; idx++)
 		{
-			array[i] = i;
+			array[idx] = rand() % 100;
 		}
 		code(array, n, 42);
 		n += 100;
