@@ -1,9 +1,10 @@
 #include <time.h>
 #include <stdio.h>
+#include <stdlib.h>
 
-void code()
+void code(int n, int numb)
 {
-	for (int i = 0; i < 10000; i++)
+	for (int i = 0; i < n; i++)
 	{
 		printf(".");
 	}
@@ -16,23 +17,33 @@ int main(int argc, char** argv)
 	clock_t avgTicks = 0;
 	double avgSec = 0;
 	int iterations = 1;
+	int tElapsed = 0;
+	double sElapsed = 0;
 	FILE* report;
 	
 	report = fopen("report.csv", "w");
-	
+	fprintf(report, "iteration,inputSize,elapsedTicks,elapsedSec\n");
 	if (argc > 1) iterations = atoi(argv[1]);
+	
+	int array[100];
+	int n = 10;
+	for (int i = 0; i < n; i++)
+	{
+		array[i] = rand() % 100;
+	}
 	
 	for (int i = 0; i < iterations; i++)
 	{
-		fprintf(report, "iteration,%d\n", i+1);
-		fprintf(report, "start,%d\n", (int)(t=clock()));
+		t=clock();
 	
 		code();
-	
-		fprintf(report, "stop,%d\n", (int)(t=clock()-t));
-		fprintf(report, "ElapsedSec,%f\n", (double)t / CLOCKS_PER_SEC);
+		
+		t=clock()-t;
+		tElapsed = t;
+		sElapsed = (double)t / CLOCKS_PER_SEC;
 		avgTicks += t;
-		avgSec += (double)t / CLOCKS_PER_SEC;
+		avgSec += sElapsed;
+		fprintf(report, "%d,%d,%d,%f\n", i+1, n, tElapsed, sElapsed);
 	}		
 	avgTicks /= iterations;
 	avgSec /= iterations;

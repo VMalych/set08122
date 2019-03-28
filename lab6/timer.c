@@ -1,8 +1,6 @@
 #include <time.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <windows.h>
-
 
 void code(int* array, int n, int numb)
 {
